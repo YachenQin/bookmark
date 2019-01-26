@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Home</h1>
+    
+{% with total_images_created=request.user.images_created.count %}
+        <p>You have {{ total_images_created }} image in your home page{{ total_images_created|pluralize }}.</p>
+    {% endwith %}
+
+
+<h2>What's happening now?</h2>
+<div id="action-list">
+{% for action in actions %}
+{% include "actions/action/detail.html" %}
+{% endfor %}
+</div>
+
+<p>You can <a href="{% url "edit" %}">edit your profile</a> or <a href="{% url "password_change" %}">change your password</a>.<p>
+
+    
+<p>It can help you save the image you want from the Internet → <a href="javascript:{% include "bookmarklet_launcher.js" %}" class="button">Bookmark it!</a><p>
+
+{% endblock %}
+
+<h2>What's happening</h2>
+<div id="action-list">
+{% for action in actions %}
+{% include "actions/action/detail.html" %}
+{% endfor %}
+</div>
